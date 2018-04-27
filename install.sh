@@ -7,7 +7,7 @@ cat <<EOF
 Usage:
 $0 [OPTION]
 -h, --help      show this message.
--2, --rb2     install the plugin for rhythmbox version 2.96 to 2.99 (default).
+-2, --rb2       install the plugin for rhythmbox version 2.96 to 2.99 (default).
 -3, --rb3       install the plugin for rhythmbox 3
 -n, --no-sudo   work without sudo, but requires modifications to bashrc
 
@@ -55,7 +55,7 @@ SUDO=${SUDO:=true}
 ########################## START INSTALLATION ################################
 
 SCRIPT_NAME=`basename "$0"`
-SCRIPT_PATH=${0%`basename "$0"`}
+SCRIPT_PATH="plugin/"
 PLUGIN_PATH="${HOME}/.local/share/rhythmbox/plugins/RhythmboxRandomAlbumPlayer/"
 GLIB_SCHEME="org.gnome.rhythmbox.plugins.randomalbumplayer.gschema.xml"
 SCHEMA_FOLDER=""
@@ -79,9 +79,6 @@ if [[ $RB == false ]]
 then
     mv "$PLUGIN_PATH"rhythmbox-random-album-player.plugin3 "$PLUGIN_PATH"rhythmbox-random-album-player.plugin
 fi
-
-#remove the install script from the dir (not needed)
-rm "${PLUGIN_PATH}${SCRIPT_NAME}"
 
 #install the glib schema
 if [[ $SUDO == true ]]
