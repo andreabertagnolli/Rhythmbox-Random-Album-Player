@@ -55,7 +55,6 @@ SUDO=${SUDO:=true}
 ########################## START INSTALLATION ################################
 
 SCRIPT_NAME=`basename "$0"`
-SCRIPT_PATH="plugin/"
 PLUGIN_PATH="${HOME}/.local/share/rhythmbox/plugins/RhythmboxRandomAlbumPlayer/"
 GLIB_SCHEME="org.gnome.rhythmbox.plugins.randomalbumplayer.gschema.xml"
 SCHEMA_FOLDER=""
@@ -72,7 +71,7 @@ fi
 mkdir -p $PLUGIN_PATH
 
 #copy the files
-cp -r "${SCRIPT_PATH}"* "$PLUGIN_PATH"
+cp -r plugin/* "$PLUGIN_PATH"
 
 #install the plugin; the install path depends on the install mode
 if [[ $RB == false ]]
@@ -84,14 +83,14 @@ fi
 if [[ $SUDO == true ]]
 then
     echo "Installing the glib schema (password needed)"
-    sudo cp "${PLUGIN_PATH}${SCHEMA_FOLDER}${GLIB_SCHEME}" "$GLIB_DIR"
+    sudo cp schema/* "$GLIB_DIR"
     sudo glib-compile-schemas "$GLIB_DIR"
 fi
 if [[ $SUDO == false ]]
 then
     echo "Installing the glib schema"
     mkdir -p $GLIB_DIR
-    cp "${PLUGIN_PATH}${SCHEMA_FOLDER}${GLIB_SCHEME}" "$GLIB_DIR"
+    cp schema/* "$GLIB_DIR"
     glib-compile-schemas "$GLIB_DIR"
 
     echo "Add this in your .bashrc if it is not already:"
