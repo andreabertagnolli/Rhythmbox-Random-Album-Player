@@ -624,6 +624,7 @@ class ApplicationShell(object):
                     app.add_plugin_menu_item(menu,
                         index, item)
                     self._uids[index] = menu
+
             else:
                 uim = self.shell.props.ui_manager
                 self._uids.append(uim.add_ui_from_string(ui_string))

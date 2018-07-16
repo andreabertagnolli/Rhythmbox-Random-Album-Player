@@ -27,7 +27,6 @@ from gi.repository import Gio
 
 from RandomAlbumConfigDialog import ConfigDialog
 
-#~ GLib.threads_init()
 import random_rb3compat
 from random_rb3compat import ActionGroup
 from random_rb3compat import Action
@@ -40,14 +39,6 @@ menu_item_ui = '''
         <menuitem name="RandomAlbumItem" action="RandomAlbum"/>
       </menu>
     </menubar>
-  </ui>
-'''
-
-toolbar_button_ui = '''
-  <ui>
-    <toolbar name="ToolBar">
-      <toolitem name="RandomAlbumItem" action="RandomAlbum" />
-    </toolbar>
   </ui>
 '''
 
@@ -72,11 +63,6 @@ class RandomAlbumPlugin(GObject.Object, Peas.Activatable):
     self._appshell = ApplicationShell(self.shell)
     self._appshell.insert_action_group(self.action_group)
     self._appshell.add_app_menuitems(menu_item_ui, 'RandomAlbumActionGroup')
-
-    if not random_rb3compat.is_rb3():
-        #uim = self.shell.props.ui_manager
-        self._appshell.add_app_menuitems(toolbar_button_ui, 'RandomAlbum')
-        #uim.add_ui_from_string(toolbar_button_ui)
 
     self.settings = Gio.Settings('org.gnome.rhythmbox.plugins.randomalbumplayer')
 
