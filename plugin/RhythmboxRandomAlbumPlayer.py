@@ -64,6 +64,11 @@ class RandomAlbumPlugin(GObject.Object, Peas.Activatable):
     self._appshell.insert_action_group(self.action_group)
     self._appshell.add_app_menuitems(menu_item_ui, 'RandomAlbumActionGroup')
 
+    if not random_rb3compat.is_rb3():
+        #uim = self.shell.props.ui_manager
+        self._appshell.add_app_menuitems(toolbar_button_ui, 'RandomAlbum')
+        #uim.add_ui_from_string(toolbar_button_ui)
+
     self.settings = Gio.Settings('org.gnome.rhythmbox.plugins.randomalbumplayer')
 
   def do_deactivate(self):
